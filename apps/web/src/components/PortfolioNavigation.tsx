@@ -1,0 +1,3 @@
+export const views=['Overview','Tokens','DeFi','Staking','Lending','LPs & Pools','Rewards'] as const;
+export type View=typeof views[number];
+export function PortfolioNavigation({value,onChange}:{value:View;onChange:(v:View)=>void}){return <nav className="portfolio-nav" aria-label="Portfolio views">{views.map((view,i)=><button key={view} className={`${value===view?'active':''} ${i>2?'secondary-view':''}`} onClick={()=>onChange(view)} aria-current={value===view?'page':undefined}>{view}</button>)}<label className="mobile-views">More views<select aria-label="More portfolio views" value={value} onChange={e=>onChange(e.target.value as View)}>{views.map(v=><option key={v}>{v}</option>)}</select></label></nav>;}
