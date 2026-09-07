@@ -13,8 +13,16 @@ test('entry validates wallet, demo details and filters work, no unsafe destinati
 });
 test('empty, partial, stale, unavailable and unknown are distinct',async({page})=>{
  await openDemo(page);
- for(const [key,text] of [['empty','No token balances in the successfully checked scope.'],['partial','Partial coverage'],['stale','Stale snapshot'],['unavailable','We can’t establish holdings yet'],['unknown','Unknown deployment'],['loading','Checking wallet and provider scopes']]){
-  await page.getByLabel('Demo scenario').selectOption(key!);await expect(page.getByText(text!,{exact:false}).first()).toBeVisible();
+ const states=[
+  ['empty',page.locator('.holdings').getByText('No token balances in the successfully checked scope.',{exact:true})],
+  ['partial',page.locator('.hero').getByText('Partial coverage',{exact:true})],
+  ['stale',page.locator('.status-line').getByText('Stale snapshot · Original observation time retained',{exact:true})],
+  ['unavailable',page.locator('.empty-state').getByRole('heading',{name:'We can’t establish holdings yet',exact:true})],
+  ['unknown',page.locator('.position-card>summary').getByText('Unknown deployment',{exact:true})],
+  ['loading',page.locator('.status-line').getByText('Checking wallet and provider scopes…',{exact:true})],
+ ] as const;
+ for(const [key,state] of states){
+  await page.getByLabel('Demo scenario').selectOption(key);await expect(state).toBeVisible();
   if(key==='unavailable'||key==='loading')await expect(page.locator('.hero-value')).not.toHaveText('$0.00');
  }
 });
