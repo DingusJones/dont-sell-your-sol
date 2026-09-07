@@ -39,7 +39,7 @@ The RPC adapter implements `getBalance`, both token-program ownership reads, mai
 - `tests/fixtures`: explicitly synthetic scenarios and RPC response shapes.
 - `docs`: coverage, decisions, privacy, operations, verification evidence and remaining gates.
 
-`npm run build` creates `dist/web` and `dist/api/worker.js`. Static production assets must be served with the API on the same origin; the Worker accepts an `ASSETS` binding. `npm run preview` provides a local preview with the same API middleware. Hosting and deployment have deliberately not been selected or performed.
+`npm run build` creates `dist/web` and `dist/api/worker.js`. GitHub Pages serves the static frontend at the project-site subpath through `.github/workflows/pages.yml`; the Pages build supports the complete synthetic demo and responsive UI. Static production assets must be served with the API on the same origin for real wallet lookups; GitHub Pages cannot host the Worker or server-only RPC/Jupiter credentials. `npm run preview` provides a local preview with the same API middleware.
 
 No positive live protocol fixtures or rendered exact destinations were supplied. Native staking, LST enrichment, Jupiter protocol positions, Kamino, Save, Orca and later adapters remain unknown/unverified. All action links are disabled. Optional live token spot pricing is implemented; history remains unavailable. See [coverage](docs/coverage.md) and [implementation report](docs/implementation-report.md).
 

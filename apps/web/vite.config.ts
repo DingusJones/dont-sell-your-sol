@@ -15,4 +15,4 @@ function localApi():Plugin {
  });};
  return {name:'same-origin-local-api',configureServer:attach,configurePreviewServer:attach};
 }
-export default defineConfig({root:fileURLToPath(new URL('.',import.meta.url)),plugins:[react(),localApi()],server:{host:'127.0.0.1',port:5173},preview:{host:'127.0.0.1',port:4173},build:{outDir:'../../dist/web',emptyOutDir:true}});
+export default defineConfig({base:process.env.GITHUB_ACTIONS?'/dont-sell-your-sol/':'/',root:fileURLToPath(new URL('.',import.meta.url)),plugins:[react(),localApi()],server:{host:'127.0.0.1',port:5173},preview:{host:'127.0.0.1',port:4173},build:{outDir:'../../dist/web',emptyOutDir:true}});
