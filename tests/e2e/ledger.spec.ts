@@ -18,7 +18,7 @@ test('empty, partial, stale, unavailable and unknown are distinct',async({page})
   ['partial',page.locator('.hero').getByText('Partial coverage',{exact:true})],
   ['stale',page.locator('.status-line').getByText('Stale snapshot · Original observation time retained',{exact:true})],
   ['unavailable',page.locator('.empty-state').getByRole('heading',{name:'We can’t establish holdings yet',exact:true})],
-  ['unknown',page.locator('.position-card').getByText('Unknown deployment',{exact:true})],
+  ['unknown',page.locator('.coverage-panel').getByText('unknown',{exact:true})],
   ['loading',page.locator('.status-line').getByText('Checking wallet and provider scopes…',{exact:true})],
  ] as const;
  for(const [key,state] of states){
